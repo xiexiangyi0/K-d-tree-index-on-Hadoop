@@ -10,6 +10,7 @@ public class KDTreeMain {
 		}
 		
 		KDTree kdt = new KDTree(posArr);
+		kdt.print();
 	}
 
 }

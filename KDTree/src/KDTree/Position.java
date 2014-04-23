@@ -1,5 +1,3 @@
-/*Author: Xiangyi Xie*/
-
 package KDTree;
 
 class Position {
@@ -8,5 +6,9 @@ class Position {
 	public Position(int xx, int yy) {
 		x = xx;
 		y = yy;
+	}
+	public int getPosAtAix(int aix) {
+		if(aix % 2 == 0) return x;
+		else return y;
 	}
 }
