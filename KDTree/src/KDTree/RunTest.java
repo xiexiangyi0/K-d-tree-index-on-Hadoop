@@ -9,7 +9,7 @@ public class RunTest {
 	 */
 	public static void main(String[] args) {
 		final int testnum = 1500;
-		Btree<Long> b = new Btree<Long>();
+		KDTree<Long> b = new KDTree<Long>();
 		Random r = new Random();
 	
 		HashMap<Integer,Long> hm = new HashMap<Integer,Long>();
