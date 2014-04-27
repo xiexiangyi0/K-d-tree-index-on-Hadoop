@@ -8,11 +8,14 @@ class KDTree {
 	private KDTreeNode root;
 	private Position [] dataChunk;
 	
+	private int k;
+	
 	public KDTree(Position [] posArr) {
 		this.dataChunk = posArr;
-		int [][] dataIdxInOrder = new int[2][posArr.length];
+		k = posArr[0].getDim();
+		int [][] dataIdxInOrder = new int[k][posArr.length];
 		
-		//TODO: sort in two directions
+		//sort in two directions
 		for(int i=0; i<posArr.length; i++) {
 			dataIdxInOrder[0][i] = i;
 			dataIdxInOrder[1][i] = i;
@@ -43,7 +46,6 @@ class KDTree {
 	private KDTreeNode makeSubKDTree(int [][] idxArr, int depth) {
 		if(idxArr[0].length == 0) return null;
 		
-		int k = idxArr.length;
 		int n = idxArr[0].length;
 		int curAix = depth%k;
 		
@@ -97,6 +99,53 @@ class KDTree {
 		for(int i=0; i<idxArrObj.length; i++) {
 			idxArr[i] = idxArrObj[i].intValue();
 		}
+	}
+	
+	private Position findNN(KDTreeNode node, Position target, Position best, int depth) {
+		if(node == null) return best;
+		Position cur_pos = node.getData();
+		if(cur_pos.getDist2(target) < best.getDist2(target)) {
+			best = cur_pos;
+		}	
+		
+		int aix = depth % k;
+		
+		int cur_cor = cur_pos.getPosAtAix(aix);
+		int target_cor = target.getPosAtAix(aix); 
+		
+		int cur_dist2 = (target_cor-cur_cor)*(target_cor-cur_cor);
+		
+		if(target_cor < cur_cor ) {
+			//target is on the left part
+			best = findNN(node.getLeft(), target, best, depth+1);
+			int best_dist2 = best.getDist2(target);
+			if(best_dist2 >= cur_dist2) {
+				//intersect with right part
+				best = findNN(node.getRight(), target, best, depth+1);
+			}
+			
+		} else {
+			//target is on the right part
+			best = findNN(node.getRight(), target, best, depth+1);
+			int best_dist2 = best.getDist2(target);
+			if(best_dist2 >= cur_dist2) {
+				//intersect with left part
+				best = findNN(node.getLeft(), target, best, depth+1);
+			}
+		}
+		
+		return best;
+		
+	}
+	
+	public Position nearestNeighbour(int x, int y) {
+		if (root == null) return null;
+		
+		Position pos = root.getData();
+		
+		Position target = new Position(x, y);
+		
+		return findNN(root, target, pos, 0);
 	}
 
 }

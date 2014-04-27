@@ -21,9 +21,11 @@ class KDTreeNode {
 			System.out.print(' ');
 		}
 	}
+	
 	public void print(int depth) {
 		printSpace(depth);
-		System.out.println("id = " + id + ", x = " + pos.x + ", y = " + pos.y);
+		System.out.println("Node id = " + id + ", Position id = " + 
+		pos.id + ", x = " + pos.x + ", y = " + pos.y);
 		if(left != null) {
 			printSpace(depth);
 			System.out.println("left: ");
@@ -35,5 +37,17 @@ class KDTreeNode {
 			System.out.println("right: ");
 			right.print(depth+1);
 		}
+	}
+	
+	public Position getData() {
+		return pos;
+	}
+	
+	public KDTreeNode getLeft() {
+		return left;
+	}
+	
+	public KDTreeNode getRight() {
+		return right;
 	}
 }

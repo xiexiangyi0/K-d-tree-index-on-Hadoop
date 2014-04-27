@@ -1,3 +1,5 @@
+package KDTree;
+
 /*I/O on fs for run test k-d tree index.*/
 import java.io.*;
 
