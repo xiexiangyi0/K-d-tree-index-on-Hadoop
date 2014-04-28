@@ -24,3 +24,30 @@ class Position {
 		return dist2;
 	}
 }
+
+class Rect {
+	private Position base;
+	private Position length;
+	
+	public Rect(int x0, int y0, int lx, int ly) {
+		base = new Position(x0, y0);
+		length = new Position(lx, ly);
+	}
+	
+	public int getBaseAtAix(int aix) {
+		return base.getPosAtAix(aix);
+	}
+	
+	public int getLengthAtAix(int aix) {
+		return length.getPosAtAix(aix);
+	}
+	
+	public boolean contains(Position point) {
+		for(int i=0; i<base.getDim(); i++) {
+			if(point.getPosAtAix(i) - base.getPosAtAix(i) > length.getPosAtAix(i)) {
+				return false;
+			}
+		}
+		return true;
+	}
+}

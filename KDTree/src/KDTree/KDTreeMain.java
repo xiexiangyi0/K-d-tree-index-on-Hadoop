@@ -1,5 +1,7 @@
 package KDTree;
 
+import java.util.Vector;
+
 public class KDTreeMain {
 
 	public static void main(String[] args) {
@@ -22,6 +24,18 @@ public class KDTreeMain {
 		System.out.println("("+x + ", " + y +
 				") nearest neighbour in kd tree is " + 
 				res.id+":(" + res.x + ", " + res.y + ")\n");
+		
+		int x0 = 2;
+		int y0 = 4;
+		int lx = 4;
+		int ly = 2;
+		
+		Vector<Position> points = kdt.rangeQuery(x0, y0, lx, ly);
+		System.out.println("Range query (" + x0 + ", " + y0 + ", " + lx + ", " + ly + ")");
+		
+		for(int i=0; i<points.size(); i++) {
+			System.out.println("(" + points.get(i).x + ", " + points.get(i).y + ")" );
+		}
 	}
 
 }

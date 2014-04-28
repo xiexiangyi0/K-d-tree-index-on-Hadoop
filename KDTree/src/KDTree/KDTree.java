@@ -2,6 +2,7 @@ package KDTree;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Vector;
 
 
 class KDTree {
@@ -146,6 +147,37 @@ class KDTree {
 		Position target = new Position(x, y);
 		
 		return findNN(root, target, pos, 0);
+	}
+	
+	//acc is accumulator
+	private Vector<Position> rangeQueryInNode(KDTreeNode pnode, Rect range, int depth, Vector<Position> acc) {
+		if(pnode == null) return acc;
+		Position cur_pos = pnode.getData();
+		if(range.contains(cur_pos)) {
+			acc.add(cur_pos);
+		}
+		
+		int aix = depth % k;
+		
+		if(range.getBaseAtAix(aix) < cur_pos.getPosAtAix(aix)) {
+			acc = rangeQueryInNode(pnode.getLeft(), range, depth+1, acc);
+			if(range.getBaseAtAix(aix) + range.getLengthAtAix(aix) >= cur_pos.getPosAtAix(aix)) {
+				acc = rangeQueryInNode(pnode.getRight(), range, depth+1, acc);
+			}
+		} else {
+			acc = rangeQueryInNode(pnode.getRight(), range, depth+1, acc);
+			if(range.getBaseAtAix(aix) - range.getLengthAtAix(aix) < cur_pos.getPosAtAix(aix)) {
+				acc = rangeQueryInNode(pnode.getLeft(), range, depth+1, acc);
+			}
+		}
+		return acc;
+	}
+	
+	public Vector<Position> rangeQuery(int x0, int y0, int lx, int ly) {
+		if(root == null) return null;
+		Rect range = new Rect(x0, y0, lx, ly);
+		Vector<Position> acc = new Vector<Position>();
+		return rangeQueryInNode(root, range, 0, acc);
 	}
 
 }
