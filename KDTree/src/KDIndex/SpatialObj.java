@@ -1,4 +1,4 @@
-package quadIndex;
+package KDIndex;
 
 
 import org.apache.hadoop.io.Writable;

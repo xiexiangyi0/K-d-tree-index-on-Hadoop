@@ -1,4 +1,4 @@
-package quadIndex;
+package KDIndex;
 
 import java.io.DataInput;
 import java.io.DataOutput;

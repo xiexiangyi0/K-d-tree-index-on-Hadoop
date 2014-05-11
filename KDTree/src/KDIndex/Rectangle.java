@@ -1,4 +1,4 @@
-package quadIndex;
+package KDIndex;
 
 import java.io.DataInput;
 import java.io.DataOutput;
@@ -7,10 +7,6 @@ import java.util.Iterator;
 
 import org.apache.hadoop.io.Writable;
 
-/*
- * A helper Class as a substitude for java.awt.Rectangle
- * Author: Li Wang, Donghan Miao
- */
 public class Rectangle extends SpatialObj implements Writable {
 
 	public double getWidth(){

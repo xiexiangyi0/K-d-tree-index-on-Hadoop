@@ -1,0 +1,5 @@
+package shape;
+
+class Shape {
+
+}

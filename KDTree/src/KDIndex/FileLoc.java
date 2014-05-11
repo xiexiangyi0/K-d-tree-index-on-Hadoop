@@ -1,4 +1,4 @@
-package quadIndex;
+package KDIndex;
 
 import java.io.DataInput;
 import java.io.DataOutput;
@@ -7,11 +7,7 @@ import java.io.IOException;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.hadoop.io.Writable;
-/*
- * This index data describing the location of a 
- * spatial obj in the raw-data file.
- * Author: Donghan Miao
- * */
+
 public class FileLoc implements Writable {
 
 	int offset;
