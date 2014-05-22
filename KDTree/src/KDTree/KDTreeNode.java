@@ -1,53 +1,15 @@
-package KDTree;
+package kdtree;
 
 class KDTreeNode {
-	private static int nextId = 0;
-	private Position pos;
-	private int id;
+	int data_idx = -1;
+	KDTreeNode left = null;
+	KDTreeNode right = null;
 	
-	private KDTreeNode left;
-	private KDTreeNode right;
-	
-	public KDTreeNode(Position xy, KDTreeNode lc, KDTreeNode rc) {
-		pos = xy;
+	public KDTreeNode(int idx, KDTreeNode lc, KDTreeNode rc) {
+		data_idx = idx;
 		left = lc;
 		right = rc;
-		id = nextId;
-		nextId++;
 	}
-	
-	private void printSpace(int num) {
-		for(int i=0; i<num*2; i++) {
-			System.out.print(' ');
-		}
-	}
-	
-	public void print(int depth) {
-		printSpace(depth);
-		System.out.println("Node id = " + id + ", Position id = " + 
-		pos.id + ", x = " + pos.x + ", y = " + pos.y);
-		if(left != null) {
-			printSpace(depth);
-			System.out.println("left: ");
-			left.print(depth+1);
-		}
-		
-		if(right != null) {
-			printSpace(depth);
-			System.out.println("right: ");
-			right.print(depth+1);
-		}
-	}
-	
-	public Position getData() {
-		return pos;
-	}
-	
-	public KDTreeNode getLeft() {
-		return left;
-	}
-	
-	public KDTreeNode getRight() {
-		return right;
-	}
+
+
 }
